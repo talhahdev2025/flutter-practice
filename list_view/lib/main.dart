@@ -90,6 +90,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Center(
+        //TODO: add ListView.Builder implementation
+        // ListView.builder(),
+        //implementation of Named Constructors of ListView.Seperated
+        // child:AnimatedSeperatedListView(),
+        //implementation on simple list view
         child: ListView(
           children: List.generate(listLength, (index) {
             var rand = Random();
@@ -136,6 +141,44 @@ class _MyHomePageState extends State<MyHomePage> {
               selected: selectedList[index],
             );
           }),
+        ),
+      ),
+    );
+  }
+}
+
+//Animated Seperated List View
+class AnimatedSeperatedListView extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _AnimatedSeperatedListViewState();
+}
+
+class _AnimatedSeperatedListViewState extends State<AnimatedSeperatedListView> {
+  bool isAnimated = false;
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemCount: 10,
+      separatorBuilder: (context, index) =>
+          Divider(height: 5, endIndent: 20, indent: 20),
+      itemBuilder: (context, index) => GestureDetector(
+        onTap: () => setState(() {
+          isAnimated = !isAnimated;
+        }),
+        child: AnimatedContainer(
+          alignment: .center,
+          duration: Duration(seconds: 5),
+          // transform: Transform.scale(scale: isAnimated ? 1.1 : 1).transform,
+          margin: EdgeInsets.all(10),
+          height: isAnimated ? 50 : 40,
+          decoration: BoxDecoration(
+            color: isAnimated ? Colors.red : Colors.green,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            'This is Index $index',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
         ),
       ),
     );
