@@ -1,2 +1,2 @@
 # flutter-practice
-Flutter and dart practice repo
+Flutter practice repo
