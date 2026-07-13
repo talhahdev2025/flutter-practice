@@ -32,8 +32,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isAnimated = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,47 +71,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 child: ListView.builder(
                   itemCount: 20,
-                  itemBuilder: (context, index) => AnimatedContainer(
-                    duration: Duration(seconds: 3),
-                    height: isAnimated ? 100 : 60,
-                    padding: EdgeInsets.all(8),
-                    margin: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.redAccent,
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: .spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: .start,
-                          children: [
-                            Text(
-                              'this is title # $index',
-                              style: TextStyle(
-                                fontSize: 24,
-                                color: Colors.white,
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, '/listPage'),
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      margin: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent,
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: .spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: .start,
+                            children: [
+                              Text(
+                                'this is title # $index',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'subtitle $index',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
+                              Text(
+                                'subtitle $index',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        GestureDetector(
-                          onTap: () => setState(() {
-                            isAnimated = !isAnimated;
-                          }),
-                          child: Icon(
-                            Icons.arrow_downward_rounded,
-                            color: Colors.white,
+                            ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
